@@ -1,8 +1,8 @@
 /* eslint global-require:0 */
 import { applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import reducers from '../components/reducers';
-import sagas from '../components/sagas';
+import reducers from '../reducers';
+import sagas from '../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
@@ -23,13 +23,6 @@ const store = createStore(
     enhancer
 );
 
-if (module.hot) {
-    module.hot.accept('../components/reducers', () => {
-        const nextReducer = require('../components/reducers').default;
-
-        store.replaceReducer(nextReducer);
-    });
-}
 
 sagaMiddleware.run(sagas);
 

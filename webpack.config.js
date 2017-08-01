@@ -9,8 +9,13 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 })
 
+// API Settings
+const hostname =  'api.population.io/';
+const protocol =  'http';
+const proxyTarget = `${protocol}://${hostname}`;
+
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+    context: path.resolve(__dirname, 'src'),
 
     entry: [
         'webpack-dev-server/client?http://localhost:8080',
@@ -19,64 +24,77 @@ module.exports = {
         './index.jsx'
     ],
 
-  output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: "index.js",
-  },
-  
-  resolve: {
-      extensions: ['.js', '.json', '.jsx'],
-  },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: "index.js",
+    },
 
-  module: {
-      rules: [
-          // JS Loader
-          {
-              test: /\.jsx?$/,
-              use: {
-                  loader: 'babel-loader'
-              },
-              exclude: '/node_modules/',
-              include: [path.join(__dirname, 'src')]
-          },
-          // Chained SASS Loader
-          {
-              test: /\.scss$/,
-              use: ExtractTextPlugin.extract({
-                  use: [
-                      {
-                          loader: 'css-loader',
-                          options: {
-                              importLoaders: 1
-                          }
-                      },
-                      'sass-loader'
-                  ]
-              })
-          },
-          // Chained CSS Loader
-          {
-              test: /\.css$/,
-              use: ExtractTextPlugin.extract({
-                  use: ['css-loader']
-              })
-          },
-          // Images
-          {
-              test: /\.(png|jpg|gif|woff|woff2|ttf|eot|svg)/,
-              use: {
-                  loader: ' ',
-                  options: {
-                      limit: 8192
-                  }
-              }
-          }
-      ]
-  },
-  plugins: [HtmlWebpackPluginConfig,
-            new webpack.HotModuleReplacementPlugin(),
-            new ExtractTextPlugin({
-                filename: 'css/[name].styles.css',
-                allChunks: false
-      }),]
+    resolve: {
+        extensions: ['.js', '.json', '.jsx'],
+    },
+
+    module: {
+        rules: [
+            // JS Loader
+            {
+                test: /\.jsx?$/,
+                use: {
+                    loader: 'babel-loader'
+                },
+                exclude: '/node_modules/',
+                include: [path.join(__dirname, 'src')]
+            },
+            // Chained SASS Loader
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1
+                            }
+                        },
+                        'sass-loader'
+                    ]
+                })
+            },
+            // Chained CSS Loader
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    use: ['css-loader']
+                })
+            },
+            // Images
+            {
+                test: /\.(png|jpg|gif|woff|woff2|ttf|eot|svg)/,
+                use: {
+                    loader: ' ',
+                    options: {
+                        limit: 8192
+                    }
+                }
+            }
+        ]
+    },
+    plugins: [HtmlWebpackPluginConfig,
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin({
+            filename: 'css/[name].styles.css',
+            allChunks: false
+        })
+    ],
+    devServer: {
+        contentBase: './dist',
+        historyApiFallback: true,
+        compress: true,
+        publicPath: '/',
+        proxy: {
+            '/': {
+                target: proxyTarget,
+                secure: false
+            }
+        },
+    }
 }

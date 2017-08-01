@@ -23,4 +23,3 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// console.log('Hello World!!');

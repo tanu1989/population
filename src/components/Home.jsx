@@ -1,7 +1,13 @@
 import React from 'react';
-import {Grid, Row, Col} from 'react-bootstrap'
+import {Grid, Row, Col} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import {getPopulation} from './actions';
 
 class Home extends React.Component{
+
+    componentDidMount(){
+        this.props.handleGetPopulation('USA', 'date');
+    }
 
     render(){
 
@@ -24,4 +30,16 @@ class Home extends React.Component{
         )
     }
 }
-export default Home;
+
+export const mapDispatchToProps = (dispatch) => {
+    return {
+        handleGetPopulation : (country, date) =>  dispatch(getPopulation(country,date))
+    }
+}
+
+export const mapStateToProps = (state) => {
+    return {
+        population: state.population
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-
+import population from '../src/components/reducer';
 
 export const initialLocationState = {
     location: null,
@@ -12,5 +12,6 @@ export const location = function location(state = initialLocationState, action) 
 };
 
 export default combineReducers({
-    location
+    location,
+    population
 });
