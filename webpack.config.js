@@ -10,9 +10,10 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 })
 
 // API Settings
-const hostname =  'api.population.io/';
+const hostname =  'api.population.io';
+const port = 80;
 const protocol =  'http';
-const proxyTarget = `${protocol}://${hostname}`;
+const proxyTarget = `${protocol}://${hostname}:${port}`;
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -91,9 +92,9 @@ module.exports = {
         compress: true,
         publicPath: '/',
         proxy: {
-            '/': {
+            '/1.0': {
                 target: proxyTarget,
-                secure: false
+                secure: false,
             }
         },
     }
