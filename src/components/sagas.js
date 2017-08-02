@@ -4,6 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 const now = moment().format("YYYY-MM-DD");
+const year = moment().format("YYYY");
 
 
 export function getPopulation(country){
@@ -34,10 +35,11 @@ export function getRanking(dob,country,gender) {
 }
 
 export function getSmallestCountries(arr) {
-    let promiseArray = arr.map(name => axios.get(`http://api.population.io:80/1.0/population/${name}/${now}/`));
+    let age = 18;
+    let promiseArray = arr.map(name => axios.get(`http://api.population.io:80/1.0/population/${year}/${name}/${age}/`));
     return axios.all(promiseArray)
         .then((res) =>{
-            let temp = res.map(r => r.data.total_population);
+            let temp = res.map(r => r.data[0]);
             return temp;
         }).catch(error => {
             return error;

@@ -103,13 +103,12 @@ class Home extends React.Component{
 
     printSmallCountry = () => {
         const {smallestCountries} = this.props;
-        const {smallestCountryNames} = this.state;
 
         if(smallestCountries.isLoading) {
             return <Spinner/>
         }else if(!smallestCountries.isLoading && smallestCountries.sCountries){
-            return smallestCountries.sCountries.map((country, id) => {
-                return <ShortestCountry name={smallestCountryNames[id]} countryDetail={country}/>
+            return smallestCountries.sCountries.map((country) => {
+                return <ShortestCountry countryDetail={country}/>
             })
         }
     };
@@ -132,8 +131,10 @@ class Home extends React.Component{
         let {showRanking, showSmallestCountries, smallestCountryNames} = this.state;
         let {totalPopulation, population, smallestCountries} = this.props;
 
-        let populationSum = totalPopulation.totalPopulation.length != 0 ? calculatePopulationSum(totalPopulation.totalPopulation) : 0;
-        let calculateSmallCountryTotal = smallestCountries.sCountries.length != 0 ? calculatePopulationSum(smallestCountries.sCountries) : 0;
+        let popArr = totalPopulation.totalPopulation.length != 0 ? totalPopulation.totalPopulation.map((name) => { return name === undefined ? 0 :name.population}) : [];
+        let populationSum = popArr.length != 0 ? calculatePopulationSum(popArr) : 0;
+        let smallArr = smallestCountries.sCountries.length != 0 ? smallestCountries.sCountries.map((name) => { return name.total}) : []
+        let calculateSmallCountryTotal = smallArr.length != 0 ? calculatePopulationSum(smallArr) : 0;
 
 
 
@@ -164,7 +165,7 @@ class Home extends React.Component{
                     <h6>Population of countries with shortest names</h6>
                     <Button bsStyle="info" className="btn1" onClick={this.findSmallest}>Fetch</Button>
                     {showSmallestCountries ?  <div className="smallCountry">
-                            <Grid style={{paddingTop: '45px'}}>
+                            <Grid>
                                 <Row>
                                     <Col md={6}>
                                         <div>Total Population of countries: {(new BigNumber(calculateSmallCountryTotal)).toFormat(2)}</div>

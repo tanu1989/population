@@ -41,6 +41,11 @@
       width: 95%;
       .row {
         padding: 10px;
+        .col-md-6 {
+          div {
+            padding: 12px;
+          }
+        }
         .largeNumber {
           text-align: center;
           word-wrap: break-word;
