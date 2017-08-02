@@ -5,6 +5,13 @@ const initialState = {
     loading: false,
     error: false,
     errorDetail: null,
+
+    totalPopulation: {
+        totalPopulation: [],
+        loading: false,
+        error: false,
+        errorDetail: null,
+    },
     countries: {
         isCountriesLoading: false,
         countries: [],
@@ -16,6 +23,11 @@ const initialState = {
         rLoading: false,
         rError: false,
         rErrorDetail: null
+    },
+    smallestCountries: {
+        sCountries: [],
+        isLoading: false,
+        error: false
     }
 }
 
@@ -113,6 +125,71 @@ const reduceFetchRankingError = (state,action) => {
     }
 }
 
+const reduceFetchSmallest = (state) => {
+  return {
+      ...state,
+      smallestCountries:{
+          ...state.smallestCountries,
+          isLoading: true
+      }
+  }
+}
+const reduceFetchSmallestSuccess = (state, action) => {
+    return {
+        ...state,
+        smallestCountries:{
+            ...state.smallestCountries,
+            isLoading: false,
+            sCountries: action.payload
+        }
+    }
+}
+
+const reduceFetchSmallestError = (state) => {
+    return {
+        ...state,
+        smallestCountries:{
+            ...state.smallestCountries,
+            isLoading: false,
+            error: true
+        }
+    }
+}
+
+const reduceFetchTotalPopulation = (state) => {
+    return {
+        ...state,
+        totalPopulation: {
+            ...state.totalPopulation,
+            loading:true
+        }
+    }
+}
+
+const reduceFetchTotalPopulationSuccess = (state, action) => {
+    return {
+        ...state,
+        totalPopulation: {
+            ...state.totalPopulation,
+            loading:false,
+            totalPopulation: action.payload
+        }
+    }
+}
+
+const reduceFetchTotalPopulationError = (state, action) => {
+    return {
+        ...state,
+        totalPopulation: {
+            ...state.totalPopulation,
+            loading: false,
+            error:true,
+            errorDetail: action.payload
+        }
+    }
+}
+
+
 const population = (state = initialState, action) => {
 
     switch(action.type){
@@ -134,7 +211,18 @@ const population = (state = initialState, action) => {
             return reduceFetchRankingSuccess(state, action);
         case actions.FETCH_RANKING_ERROR:
             return reduceFetchRankingError(state, action);
-
+        case actions.FETCH_SMALLEST:
+            return reduceFetchSmallest(state, action);
+        case actions.FETCH_SMALLEST_SUCCESS:
+            return reduceFetchSmallestSuccess(state, action);
+        case actions.FETCH_SMALLEST_ERROR:
+            return reduceFetchSmallestError(state, action);
+        case actions.GET_TOTAL_POPULATION:
+            return reduceFetchTotalPopulation(state,action);
+        case actions.GET_TOTAL_POPULATION_SUCCESS:
+            return reduceFetchTotalPopulationSuccess(state, action);
+        case actions.GET_TOTAL_POPULATION_ERROR:
+            return reduceFetchTotalPopulationError(state, action);
         default:
             return state;
     }

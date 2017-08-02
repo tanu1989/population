@@ -1,0 +1,54 @@
+@keyframes spinner {
+  to {
+    transform: rotate(360deg); } }
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 150%;
+  left: 49%;
+  width: 37px;
+  height: 37px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 1px solid #f6f;
+  border-top-color: #0e0;
+  border-right-color: #0dd;
+  border-bottom-color: #f90;
+  animation: spinner .6s linear infinite; }
+
+.titleClasses {
+  text-align: center;
+  padding: 60px; }
+  .titleClasses .container {
+    margin-top: 20px;
+    margin-left: 24%;
+    margin-bottom: 20px; }
+  .titleClasses .btn1 {
+    position: absolute;
+    display: block;
+    margin-left: 45%; }
+  .titleClasses .rankingPanel {
+    margin: 23%;
+    margin-top: 70px; }
+    .titleClasses .rankingPanel .container {
+      border: 1px solid grey;
+      margin-left: 0;
+      width: 95%; }
+      .titleClasses .rankingPanel .container .row {
+        padding: 10px; }
+        .titleClasses .rankingPanel .container .row div {
+          font-size: 18px;
+          text-align: center; }
+  .titleClasses .smallCountry {
+    margin-top: 70px;
+    margin-left: 23%;
+    margin-right: 23%; }
+    .titleClasses .smallCountry .container {
+      border: 1px solid grey;
+      margin-left: 0;
+      width: 95%; }
+      .titleClasses .smallCountry .container .row {
+        padding: 10px; }

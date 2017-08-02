@@ -97,5 +97,7 @@ module.exports = {
                 secure: false,
             }
         },
-    }
+    },
+
+    devtool: 'eval'
 }

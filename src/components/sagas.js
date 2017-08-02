@@ -1,13 +1,13 @@
-import { call, fork, put, select , takeLatest} from 'redux-saga/effects';
+import { call, fork, put, takeLatest} from 'redux-saga/effects';
 import * as actions from './actions';
 import axios from 'axios';
 import moment from 'moment';
 
+const now = moment().format("YYYY-MM-DD");
+
 
 export function getPopulation(country){
-
-    var now = moment().format("YYYY-MM-DD");
-    return axios.get(`http://api.population.io:80/1.0/population/${country}/${now}/`)
+    return axios.get(`http://api.population.io:80/1.0/population/${country === 'Australia/New Zealand' ? 'New Zealand' : country}/${now}/`)
         .then(response =>{
             return response.data
         }).catch(error =>{
@@ -16,7 +16,6 @@ export function getPopulation(country){
 }
 
 export function getCountries() {
-
     return axios.get(`http://api.population.io:80/1.0/countries`)
         .then(response =>{
             return response.data
@@ -26,9 +25,7 @@ export function getCountries() {
 }
 
 export function getRanking(dob,country,gender) {
-    var now = moment().format("YYYY-MM-DD");
-    debugger;
-    return axios.get(`http://api.population.io:80/1.0/wp-rank/${dob}/${gender}/${country}/on/${now}`)
+    return axios.get(`http://api.population.io:80/1.0/wp-rank/${dob}/${gender}/${country === 'Australia/New Zealand' ? 'New Zealand' : country}/on/${now}`)
         .then(response =>{
             return response.data
         }).catch(error =>{
@@ -36,6 +33,27 @@ export function getRanking(dob,country,gender) {
         })
 }
 
+export function getSmallestCountries(arr) {
+    let promiseArray = arr.map(name => axios.get(`http://api.population.io:80/1.0/population/${name}/${now}/`));
+    return axios.all(promiseArray)
+        .then((res) =>{
+            let temp = res.map(r => r.data.total_population);
+            return temp;
+        }).catch(error => {
+            return error;
+        })
+}
+
+export function getTotalPopulation(arr) {
+    let promiseArray = arr.countries.map(name => axios.get(`http://api.population.io:80/1.0/population/${name === 'Australia/New Zealand' ? 'New Zealand' : name}/${now}/`));
+    return axios.all(promiseArray)
+        .then((res) =>{
+            let temp = res.map(r => r.data.total_population);
+            return temp;
+        }).catch(error => {
+            return error;
+        })
+}
 
 
 export function* fetchCountryPopulation(action) {
@@ -66,8 +84,30 @@ export function* fetchRanking(action) {
     }
 
 }
+
+export function* fetchSmallestCountries(action) {
+    try {
+        const response = yield call(getSmallestCountries, action.arr);
+        yield put({ type: actions.FETCH_SMALLEST_SUCCESS, payload: response});
+    }catch(error) {
+        yield put({ type: actions.FETCH_SMALLEST_ERROR, payload: error});
+    }
+}
+
+export function* fetchTotalPopulation() {
+    try {
+        const arr =  yield call(getCountries);
+        const response = yield call(getTotalPopulation, arr);
+        yield put({ type: actions.GET_TOTAL_POPULATION_SUCCESS, payload: response});
+    }catch(error) {
+        yield put({ type: actions.GET_TOTAL_POPULATION_ERROR, payload: error});
+    }
+}
+
 export default function* sagas() {
     yield fork(takeLatest, actions.GET_POPULATION, fetchCountryPopulation);
     yield fork(takeLatest, actions.GET_COUNTRIES, fetchCountries);
     yield fork(takeLatest, actions.FETCH_RANKING, fetchRanking);
+    yield fork(takeLatest, actions.FETCH_SMALLEST, fetchSmallestCountries);
+    yield fork(takeLatest, actions.GET_TOTAL_POPULATION, fetchTotalPopulation)
 }

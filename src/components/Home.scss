@@ -16,5 +16,36 @@
   .rankingPanel {
     margin: 23%;
     margin-top: 70px;
+    .container {
+      border: 1px solid grey;
+      margin-left: 0;
+      width: 95%;
+      .row {
+        padding: 10px;
+        div {
+          font-size: 18px;
+          text-align: center;
+        }
+      }
+
+    }
+  }
+
+  .smallCountry {
+    margin-top: 70px;
+    margin-left: 23%;
+    margin-right: 23%;
+    .container {
+      border: 1px solid grey;
+      margin-left: 0;
+      width: 95%;
+      .row {
+        padding: 10px;
+        .largeNumber {
+          text-align: center;
+          word-wrap: break-word;
+        }
+      }
+    }
   }
 }
