@@ -5,6 +5,7 @@ import DatePicker from 'react-bootstrap-date-picker';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {getPopulation, getAllCountries, getRanking, findSmallestPopulations, findTotalPopulation} from './actions';
+import {calculatePopulationSum} from '../utils/CalculateBigSum';
 import Spinner from './presentational/Spinner';
 import DisplayPopulation from './presentational/DisplayPopulation';
 import RankingBlock from './presentational/RankingBlock';
@@ -123,15 +124,6 @@ class Home extends React.Component{
         }
     }
 
-    calculatePopulationSum = (arr) => {
-        return arr.reduce((a,b) => {
-            a = typeof a === 'string' ? new BigNumber(a) :new BigNumber(a.population.toString());
-            b = (b === undefined) ? new BigNumber('0') : new BigNumber(b.population.toString());
-            let sum = a.plus(b);
-            return sum.c.join('').toString();
-        }, '0');
-    };
-
     render(){
         let countries = this.getAllCountries();
         let smallCountry = this.printSmallCountry();
@@ -140,8 +132,8 @@ class Home extends React.Component{
         let {showRanking, showSmallestCountries, smallestCountryNames} = this.state;
         let {totalPopulation, population, smallestCountries} = this.props;
 
-        let populationSum = totalPopulation.totalPopulation.length != 0 ? this.calculatePopulationSum(totalPopulation.totalPopulation) : 0;
-        let calculateSmallCountryTotal = smallestCountries.sCountries.length != 0 ? this.calculatePopulationSum(smallestCountries.sCountries) : 0;
+        let populationSum = totalPopulation.totalPopulation.length != 0 ? calculatePopulationSum(totalPopulation.totalPopulation) : 0;
+        let calculateSmallCountryTotal = smallestCountries.sCountries.length != 0 ? calculatePopulationSum(smallestCountries.sCountries) : 0;
 
 
 
