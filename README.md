@@ -17,13 +17,13 @@ You should also keep track of and display on the page:
                     Provide a place for users to enter their date of birth, country and gender. When they submit this information, please render a React component showing their rank within the world.
 
 
-#Mockups
+ ##Mockups
 
 ![alt text](screenshots/screen1.png "Screen 1")
 
 ![alt text](screenshots/screen2.png "Screen 2")
 
-#How to run
+ ##How to run
 
 ```npm install```
 
