@@ -3,10 +3,10 @@
 ### Example user template
 
 # Dependency directories
-node_modules
+node_modules/
 
 # Distribution directory
-dist
+dist/
 
 # IntelliJ project files
 .idea/

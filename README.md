@@ -23,5 +23,13 @@ You should also keep track of and display on the page:
 
 ![alt text](screenshots/screen2.png "Screen 2")
 
+#How to run
 
+```npm install```
+
+```npm run build```
+
+```npm run start``` 
+
+You can now access it on http://localhost:8080
 
