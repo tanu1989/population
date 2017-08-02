@@ -10,7 +10,8 @@ const RankingBlock = ({ranking}) => {
     const dobArr = dob ? dob.split('-') : null;
 
     const rankRes = rank != undefined ? new BigNumber(rank.toString()) : new BigNumber('0');
-
+    const rankStr = rankRes.s === -1 ? ('-').concat(new BigNumber(rankRes.c.join('')).toFormat(2)) :
+                    new BigNumber(rankRes.c.join('')).toFormat(2);
     return (
         <div className="rankingPanel">
             <Grid>
@@ -20,8 +21,8 @@ const RankingBlock = ({ranking}) => {
                             <div><strong>Gender:</strong> {startCase(sex)}</div>
                         </Col>
                         <Col md={6}>
-                            <div>Your rank in the world</div>
-                            <div>You are ranked {(rankRes.c.join('') * rankRes.s).toString().toLocaleString()}</div>
+                            <div><strong>Your rank in the world</strong></div>
+                            <div>You are ranked {rankStr}</div>
                         </Col>
                     </Row>
             </Grid>

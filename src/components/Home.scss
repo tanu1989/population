@@ -1,5 +1,4 @@
 .titleClasses {
-
   text-align: center;
   padding: 60px;
   .container {
@@ -12,7 +11,6 @@
     display: block;
     margin-left: 45%;
   }
-
   .rankingPanel {
     margin: 23%;
     margin-top: 70px;
@@ -22,15 +20,16 @@
       width: 95%;
       .row {
         padding: 10px;
-        div {
-          font-size: 18px;
-          text-align: center;
+        .col-md-6 {
+          div {
+            padding: 12px;
+            font-size: 13px;
+            text-align: center;
+          }
         }
       }
-
     }
   }
-
   .smallCountry {
     margin-top: 70px;
     margin-left: 23%;

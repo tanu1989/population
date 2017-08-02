@@ -2,6 +2,7 @@ import React from 'react';
 import BigNumber from 'bignumber.js';
 import {Grid, Row, Col, Button, FormControl, ControlLabel} from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {getPopulation, getAllCountries, getRanking, findSmallestPopulations, findTotalPopulation} from './actions';
@@ -11,8 +12,9 @@ import DisplayPopulation from './presentational/DisplayPopulation';
 import RankingBlock from './presentational/RankingBlock';
 import ShortestCountry from './presentational/ShortestCountry';
 
-//default to the current date
-var date = new Date().toISOString();
+
+var date = moment().add(-1, 'days').format("YYYY-MM-DD");
+
 class Home extends React.Component{
 
     constructor(props) {
@@ -48,6 +50,19 @@ class Home extends React.Component{
         this.props.handleGetPopulation('United States');
         this.props.handleGetCountries();
         this.props.handleFindTotalPopulation();
+    };
+
+    componentWillUpdate(nextProps) {
+        //have the first country be picked as the default for the countries dropdown
+        if(this.props.countries.countries.length === 0 && nextProps.countries.countries.length !== 0){
+            this.setState((state) => ({
+                form: {
+                    ...state.form,
+                    country : nextProps.countries.countries[0]
+                }
+            }))
+        }
+
     };
 
     handleDateChange = (value, formattedValue) => {
@@ -89,7 +104,7 @@ class Home extends React.Component{
     };
 
     findSmallest = () => {
-        const countries = this.props.countries.countries;
+        const countries = [...this.props.countries.countries];
         const sortedCountries = countries.sort((a, b) => {return a.length - b.length;});
 
         const smallest = sortedCountries[0].length;
@@ -103,19 +118,16 @@ class Home extends React.Component{
 
     printSmallCountry = () => {
         const {smallestCountries} = this.props;
-
-        if(smallestCountries.isLoading) {
-            return <Spinner/>
-        }else if(!smallestCountries.isLoading && smallestCountries.sCountries){
+        if(!smallestCountries.isLoading && smallestCountries.sCountries) {
             return smallestCountries.sCountries.map((country) => {
                 return <ShortestCountry countryDetail={country}/>
             })
         }
+
     };
 
     printRankingBlock = () => {
         const {ranking} = this.props;
-
         if(ranking.rLoading) {
             return <Spinner/>
         }else if(!ranking.rLoading && ranking.ranking){
@@ -126,10 +138,10 @@ class Home extends React.Component{
     render(){
         let countries = this.getAllCountries();
         let smallCountry = this.printSmallCountry();
-        let ranking = this.printRankingBlock();
+        let rankingList = this.printRankingBlock();
 
         let {showRanking, showSmallestCountries, smallestCountryNames} = this.state;
-        let {totalPopulation, population, smallestCountries} = this.props;
+        let {totalPopulation, population, smallestCountries, ranking} = this.props;
 
         let popArr = totalPopulation.totalPopulation.length != 0 ? totalPopulation.totalPopulation.map((name) => { return name === undefined ? 0 :name.population}) : [];
         let populationSum = popArr.length != 0 ? calculatePopulationSum(popArr) : 0;
@@ -175,7 +187,7 @@ class Home extends React.Component{
                                     </Col>
                                 </Row>
                             </Grid>
-                                {smallCountry}
+                            {smallestCountries.isLoading ? <Spinner/> : smallCountry}
                             </div> : null}
                 </div>
                 <div className="titleClasses">
@@ -211,7 +223,7 @@ class Home extends React.Component{
                    <Button bsStyle={!showRanking ? "info" : "danger"} className="btn1" onClick={this.handleGetRankingAndClear}>
                        {!showRanking ? "Fetch" : "Clear"}
                    </Button>
-                    {showRanking ? ranking : null}
+                    {showRanking ?  ((ranking.isLoading) ? <Spinner/> : rankingList) : null}
                 </div>
 
 
