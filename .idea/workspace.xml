@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b8f90c9-0219-4ac8-a60c-28baa7a1e733" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/screenshots/screen1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/screenshots/screen2.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/About.jsx" afterPath="$PROJECT_DIR$/src/components/About.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.jsx" afterPath="$PROJECT_DIR$/src/components/Home.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.scss" afterPath="$PROJECT_DIR$/src/components/Home.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/presentational/ShortestCountry.jsx" afterPath="$PROJECT_DIR$/src/components/presentational/ShortestCountry.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/sagas.js" afterPath="$PROJECT_DIR$/src/components/sagas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/CalculateBigSum.js" afterPath="$PROJECT_DIR$/src/utils/CalculateBigSum.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,12 +53,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="378">
-                <caret line="21" column="47" lean-forward="true" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
+              <first_editor relative-caret-position="54">
+                <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -74,7 +66,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="About.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="About.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/About.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
@@ -148,8 +140,8 @@
         <option value="$PROJECT_DIR$/src/components/Home.scss" />
         <option value="$PROJECT_DIR$/src/components/presentational/ShortestCountry.jsx" />
         <option value="$PROJECT_DIR$/src/components/Home.jsx" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/components/About.jsx" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -788,12 +780,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1501536867446</updated>
-      <workItem from="1501536868803" duration="66235000" />
+      <workItem from="1501536868803" duration="66342000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66351000" />
+    <option name="totallyTimeSpent" value="66458000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1124,17 +1116,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="378">
-            <caret line="21" column="47" lean-forward="true" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/About.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1142,6 +1123,17 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="54">
+            <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
