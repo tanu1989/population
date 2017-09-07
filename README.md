@@ -1,7 +1,7 @@
 # World Population
 
 
-Use http://api.population.io/ to build a World Population application.
+Using http://api.population.io/ to build a World Population application.
 
 The application will be broken down into three parts:
 1) World and USA Population
